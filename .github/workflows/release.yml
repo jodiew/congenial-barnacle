@@ -56,20 +56,7 @@ jobs:
 
           ./gradlew patchChangelog --release-note-file=$RELEASE_NOTE
 
-      - name: Patch Changelog and edit release notes
-        if: ${{ github.event.release.body == '' }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          RELEASE_NOTE="./build/tmp/release_note.txt"
-          mkdir -p "$(dirname "$RELEASE_NOTE")"
-          
-          ./gradlew getChangelog --output-file=$RELEASE_NOTE -q --no-header --unreleased
-          
-          ./gradlew patchChangelog
-          gh release edit ${{ github.event.release.tag_name }} --notes-file $RELEASE_NOTE
-
-      # Buld the plugin
+      # Build the plugin
       - name: Build Plugin
         run: ./gradlew buildPlugin
 
@@ -81,7 +68,7 @@ jobs:
 
       # Create a pull request
       - name: Create Pull Request
-        # if: ${{ steps.properties.outputs.changelog != '' }}
+        if: ${{ steps.properties.outputs.changelog != '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
