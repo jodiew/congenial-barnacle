@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Changes
+
+- improve workflow triggers
+
 ## [0.0.3] - 2025-11-24
 
 ### Added
