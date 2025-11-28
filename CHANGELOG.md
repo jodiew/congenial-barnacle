@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- version links in changelog
+- version tag missing "v" prefix in `.github/workflows/build.yml`
+
 ## [0.0.4] - 2025-11-24
 
 ### Changes
